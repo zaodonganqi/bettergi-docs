@@ -121,7 +121,7 @@ await genshin.tpToStatueOfTheSeven();
 - 参数:
   - `zoomLevel` (`double`): 目标缩放等级，范围 1.0-6.0
 
-### getPositionFromBigMap()
+### getPositionFromBigMap(string? matchingMethod)
 - 返回类型: `Point2f`
 - 描述: 获取当前在大地图上的位置坐标
 - 备注:
@@ -129,13 +129,16 @@ await genshin.tpToStatueOfTheSeven();
   - 返回的坐标使用游戏内坐标系统
   - 可用于获取当前角色在大地图上的精确位置
   - 返回的Point2f结构体包含X和Y属性，分别表示横纵坐标
-- 参数: 无
+- 参数: 
+  - `matchingMethod`(`string?`): 图像匹配方式，默认为软件设置中的方式，支持以下值：
+    - `TemplateMatch` - 模板匹配
+    - `SIFT` - 特征匹配
 
 ### getCameraOrientation()
 - 返回类型：`float`
 - 描述：需要在主界面使用，获取当前的视角朝向的角度值。以水平轴向右为0度，逆时针方向角度递增。
 
-### getPositionFromMap()
+### getPositionFromMap(string? matchingMethod)
 - 返回类型: `Point2f`
 - 描述: 获取当前在小地图上的位置坐标
 - 备注:
@@ -144,11 +147,14 @@ await genshin.tpToStatueOfTheSeven();
   - 返回的坐标已转换为游戏世界坐标系统
   - 可用于实时获取角色在游戏世界中的位置
   - 如果识别失败可能会抛出异常
-- 参数: 无
+- 参数:
+  - `matchingMethod`(`string?`): 图像匹配方式，默认为软件设置中的方式，支持以下值：
+    - `TemplateMatch` - 模板匹配
+    - `SIFT` - 特征匹配
 - 异常:
   - `InvalidOperationException`: 当不在主界面时抛出此异常
 
-### getPositionFromMap(string mapName, int cacheTimeMs)
+### getPositionFromMap(string mapName, int cacheTimeMs, string? matchingMethod)
 - 返回类型: `Point2f`
 - 描述: 获取当前在小地图上的位置坐标（带缓存）
 - 参数:
@@ -159,11 +165,14 @@ await genshin.tpToStatueOfTheSeven();
     - `"SeaOfBygoneEras"` - 旧日之海
     - `"AncientSacredMountain"` - 远古圣山
   - `cacheTimeMs` (`int`): 缓存时间，单位毫秒，默认900ms
+  - `matchingMethod`(`string?`): 图像匹配方式，默认为软件设置中的方式，支持以下值：
+    - `TemplateMatch` - 模板匹配
+    - `SIFT` - 特征匹配
 - 备注:
   - 如果缓存时间内有匹配成功的坐标优先返回缓存坐标
   - 否则调用NavigationInstance的getPositionStable
 
-### getPositionFromMap(string mapName, float x, float y)
+### getPositionFromMap(string mapName, float x, float y, string? matchingMethod)
 - 返回类型: `Point2f`
 - 描述: 获取当前在小地图上的位置坐标（局部匹配）
 - 参数:
@@ -175,6 +184,9 @@ await genshin.tpToStatueOfTheSeven();
     - `"AncientSacredMountain"` - 远古圣山
   - `x` (`float`): 世界坐标x
   - `y` (`float`): 世界坐标y
+  - `matchingMethod`(`string?`): 图像匹配方式，默认为软件设置中的方式，支持以下值：
+    - `TemplateMatch` - 模板匹配
+    - `SIFT` - 特征匹配
 - 备注:
   - 局部匹配，需要世界坐标，在坐标附近匹配
   - 失败不进行全局匹配
